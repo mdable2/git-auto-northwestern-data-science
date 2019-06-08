@@ -9,7 +9,7 @@ import shlex
 import sys
 from git import Repo
 import os
-#did this change?
+
 repo_path = os.path.join(os.getcwd(), "../")
 file_path = os.path.join(os.getcwd(), "test.txt")
 
