@@ -9,14 +9,14 @@ import shlex
 import sys
 from git import Repo
 import os
-
+#did this change?
 repo_path = os.path.join(os.getcwd(), "../")
 file_path = os.path.join(os.getcwd(), "test.txt")
 
 repo = Repo(repo_path)
 master = repo.heads.master
 print(repo.git.add("."))
-print(repo.git.commit)
+print(repo.git.commit(m="test message"))
 # print(repo.git.status())
 # print(repo.git.push())
 cmd = ['git', 'push']
