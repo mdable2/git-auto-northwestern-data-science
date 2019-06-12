@@ -13,21 +13,10 @@ import shutil
 
 def copy_and_check(src, dst):
     if os.path.isdir(src):
-        # Get directory contents from src path
+        # Copy over entire directory
         shutil.copytree(src, dst)
 
-        # Check if that directory exists in dst path
-        # If not, create directory with same name
-        # Copy
-
-        
-        #directory_index = src.rfind("/")
-        # directory = src[directory_index:]
-        # print("end of src: " + directory)
-
 repo_path = os.path.join(os.getcwd(), "../")
-file_path = os.path.join(os.getcwd(), "test.txt")
-
 command_line = sys.argv
 module_num = command_line[1]
 lesson_num = command_line[2]
