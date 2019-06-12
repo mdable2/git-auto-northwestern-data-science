@@ -53,7 +53,7 @@ for i in range(1, 4):
 dst_all_files_student = os.listdir(dst_path_student)
 
 # Collect files from directories /1 /2 /3
-for i in range(0, 1):
+for i in range(0, 3):
     # Get all file names from src file paths
     sub_directory = os.path.join(str(i + 1), "Activities")
     files = os.listdir(os.path.join(src_path_teacher, sub_directory))
