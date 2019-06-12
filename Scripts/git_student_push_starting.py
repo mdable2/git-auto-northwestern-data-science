@@ -59,11 +59,30 @@ for i in range(0, 3):
     for f in files:
         if "Stu" in f:
             # If student, step into directory and add all directories/files if NOT solution
-            pass
+            src_path_sub = os.path.join(src_path_teacher, sub_directory, f)
+            sub_files = os.listdir(src_path_sub)
+            for sub_f in sub_files:
+                if "Solved" not in sub_f:
+                    src_path = os.path.join(src_path_sub, sub_f)
+                    if os.path.isdir(src_path):
+                        dst_path = os.path.join(dst_path_student, str(i + 1), f, sub_f)
+                        shutil.copytree(src_path, dst_path)
         else:
             # Go through those files - if instructor, add it straight away
             src_path = os.path.join(src_path_teacher, sub_directory, f)
             dst_path = os.path.join(dst_path_student, str(i + 1), f)
             shutil.copytree(src_path, dst_path)
 
+repo = Repo(repo_path)
+assert not repo.bare
+master = repo.heads.master
 
+try:
+    repo.git.add(".")
+    repo.git.commit(m = commit_message)
+    cmd = ['git', 'push']
+    p = Popen(cmd)
+    p.wait()
+    print("Successfuly pushed from script!")
+except:
+    print("Error occured. Git script ran unsuccessfully!")
