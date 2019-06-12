@@ -43,14 +43,27 @@ src_path_teacher = os.path.join(modules_path_teacher, directory_path)
 dst_path_student = modules_path_student
 # dst_path_student = os.path.join(modules_path_student, directory_path)
 
-# Get all file names from src and dst file paths
-src_all_files_teacher = os.listdir(src_path_teacher)
+# Make directories /1 /2 /3
+for i in range(1, 4):
+    new_directory = os.path.join(dst_path_student, str(i))
+    os.mkdir(new_directory)
+
+# Get all file names from dst file path
 dst_all_files_student = os.listdir(dst_path_student)
 
-print("scr: " + str(src_all_files_teacher))
-print("dst: " + str(dst_all_files_student))
+# Collect files from directories /1 /2 /3
+for i in range(0, 3):
+    # Get all file names from src file paths
+    sub_directory = os.path.join(str(i + 1), "Activities")
+    files = os.listdir(os.path.join(src_path_teacher, sub_directory))
+    for f in files:
+        if "Stu" in f:
+            # If student, step into directory and add all directories/files if NOT solution
+            pass
+        else:
+            # Go through those files - if instructor, add it straight away
+            src_path = os.path.join(src_path_teacher, sub_directory, f)
+            dst_path = os.path.join(dst_path_student, str(i + 1), f)
+            shutil.copytree(src_path, dst_path)
 
-# Make directories /1 /2 /3
-# Collect files from /1
-# Go through those files - if instructor, add it straight away
-# 
+
