@@ -63,23 +63,16 @@ for i in range(0, 3):
             src_path_sub = os.path.join(src_path_teacher, sub_directory, f)
             sub_files = os.listdir(src_path_sub)
             sub_files.sort(reverse = True)
-            print("WHAT IS THE TYPE???? ---- " + str(sub_files))
 
             for sub_f in sub_files:
-                print(sub_f)
                 if not sub_f == "Solved":
                     src_path = os.path.join(src_path_sub, sub_f)
-                    print("src path ------------- " + src_path)
-                    print("isdir?" + str(os.path.isdir(src_path)))
                     if os.path.isdir(src_path):
                         dst_path = os.path.join(dst_path_student, str(i + 1), f, sub_f)
-                        print("copytree called: " + dst_path)
                         shutil.copytree(src_path, dst_path)
                     else:
                         dst_path = os.path.join(dst_path_student, str(i + 1), f, sub_f)
-                        print("dst path:    " + dst_path)
                         Path(dst_path).touch()
-
                         shutil.copy(src_path, dst_path)
         else:
             # Go through those files - if instructor, add it straight away
