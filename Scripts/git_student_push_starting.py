@@ -64,9 +64,11 @@ for i in range(0, 3):
             for sub_f in sub_files:
                 if "Solved" not in sub_f:
                     src_path = os.path.join(src_path_sub, sub_f)
+                    dst_path = os.path.join(dst_path_student, str(i + 1), f, sub_f)
                     if os.path.isdir(src_path):
-                        dst_path = os.path.join(dst_path_student, str(i + 1), f, sub_f)
                         shutil.copytree(src_path, dst_path)
+                    else:
+                        shutil.copy2(src_path, dst_path)
         else:
             # Go through those files - if instructor, add it straight away
             src_path = os.path.join(src_path_teacher, sub_directory, f)
