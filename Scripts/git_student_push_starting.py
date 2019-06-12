@@ -18,6 +18,7 @@ import sys
 from git import Repo
 import os
 import shutil
+from pathlib import Path
 
 #################### FOR TESTING ##############################
 repo_path = os.path.join(os.getcwd(), "../")
@@ -43,14 +44,52 @@ src_path_teacher = os.path.join(modules_path_teacher, directory_path)
 dst_path_student = modules_path_student
 # dst_path_student = os.path.join(modules_path_student, directory_path)
 
-# Get all file names from src and dst file paths
-src_all_files_teacher = os.listdir(src_path_teacher)
+# Make directories /1 /2 /3
+for i in range(1, 4):
+    new_directory = os.path.join(dst_path_student, str(i))
+    os.mkdir(new_directory)
+
+# Get all file names from dst file path
 dst_all_files_student = os.listdir(dst_path_student)
 
-print("scr: " + str(src_all_files_teacher))
-print("dst: " + str(dst_all_files_student))
+# Collect files from directories /1 /2 /3
+for i in range(0, 3):
+    # Get all file names from src file paths
+    sub_directory = os.path.join(str(i + 1), "Activities")
+    files = os.listdir(os.path.join(src_path_teacher, sub_directory))
+    for f in files:
+        if "Stu" in f:
+            # If student, step into directory and add all directories/files if NOT solution
+            src_path_sub = os.path.join(src_path_teacher, sub_directory, f)
+            sub_files = os.listdir(src_path_sub)
+            sub_files.sort(reverse = True)
 
-# Make directories /1 /2 /3
-# Collect files from /1
-# Go through those files - if instructor, add it straight away
-# 
+            for sub_f in sub_files:
+                if not sub_f == "Solved":
+                    src_path = os.path.join(src_path_sub, sub_f)
+                    if os.path.isdir(src_path):
+                        dst_path = os.path.join(dst_path_student, str(i + 1), f, sub_f)
+                        shutil.copytree(src_path, dst_path)
+                    else:
+                        dst_path = os.path.join(dst_path_student, str(i + 1), f, sub_f)
+                        Path(dst_path).touch()
+                        shutil.copy(src_path, dst_path)
+        else:
+            # Go through those files - if instructor, add it straight away
+            src_path = os.path.join(src_path_teacher, sub_directory, f)
+            dst_path = os.path.join(dst_path_student, str(i + 1), f)
+            shutil.copytree(src_path, dst_path)
+
+repo = Repo(repo_path)
+assert not repo.bare
+master = repo.heads.master
+
+try:
+    repo.git.add(".")
+    repo.git.commit(m = commit_message)
+    cmd = ['git', 'push']
+    p = Popen(cmd)
+    p.wait()
+    print("Successfuly pushed from script!")
+except:
+    print("Error occured. Git script ran unsuccessfully!")
