@@ -18,6 +18,7 @@ import sys
 from git import Repo
 import os
 import shutil
+from pathlib import Path
 
 #################### FOR TESTING ##############################
 repo_path = os.path.join(os.getcwd(), "../")
@@ -52,7 +53,7 @@ for i in range(1, 4):
 dst_all_files_student = os.listdir(dst_path_student)
 
 # Collect files from directories /1 /2 /3
-for i in range(0, 3):
+for i in range(0, 1):
     # Get all file names from src file paths
     sub_directory = os.path.join(str(i + 1), "Activities")
     files = os.listdir(os.path.join(src_path_teacher, sub_directory))
@@ -61,15 +62,25 @@ for i in range(0, 3):
             # If student, step into directory and add all directories/files if NOT solution
             src_path_sub = os.path.join(src_path_teacher, sub_directory, f)
             sub_files = os.listdir(src_path_sub)
+            sub_files.sort(reverse = True)
+            print("WHAT IS THE TYPE???? ---- " + str(sub_files))
+
             for sub_f in sub_files:
-                if "Solved" not in sub_f:
+                print(sub_f)
+                if not sub_f == "Solved":
                     src_path = os.path.join(src_path_sub, sub_f)
+                    print("src path ------------- " + src_path)
+                    print("isdir?" + str(os.path.isdir(src_path)))
                     if os.path.isdir(src_path):
-                        dst_path = os.path.join(dst_path_student, str(i + 1), f)
+                        dst_path = os.path.join(dst_path_student, str(i + 1), f, sub_f)
+                        print("copytree called: " + dst_path)
                         shutil.copytree(src_path, dst_path)
                     else:
-                        dst_path = os.path.join(dst_path_student, str(i + 1))
-                        shutil.copy2(src_path, dst_path)
+                        dst_path = os.path.join(dst_path_student, str(i + 1), f, sub_f)
+                        print("dst path:    " + dst_path)
+                        Path(dst_path).touch()
+
+                        shutil.copy(src_path, dst_path)
         else:
             # Go through those files - if instructor, add it straight away
             src_path = os.path.join(src_path_teacher, sub_directory, f)
