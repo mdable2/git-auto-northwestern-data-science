@@ -25,7 +25,7 @@ repo_path = os.path.join(os.getcwd(), "../")
 # repo_path = os.path.join("..", "..", "NUCHI201905DATA2")
 command_line = sys.argv
 module_num = command_line[1]
-commit_message = f"Added folders for module: {module_num}"
+commit_message = f"Added folders for module: {module_num} via super cool script!"
 
 # Standard paths for teacher and student modules
 modules_path_teacher = os.path.join("..", "..", "DataViz-Lesson-Plans", "01-Lesson-Plans")
