@@ -16,7 +16,9 @@ def copy_and_check(src, dst):
         # Copy over entire directory
         shutil.copytree(src, dst)
 
+#################### FOR TESTING ##############################
 repo_path = os.path.join(os.getcwd(), "../")
+# repo_path = os.path.join("..", "..", "NUCHI201905DATA2")
 command_line = sys.argv
 module_num = command_line[1]
 lesson_num = command_line[2]
