@@ -46,6 +46,8 @@ print(dst_path_student)
 src_all_files_teacher = os.listdir(src_path_teacher)
 dst_all_files_student = os.listdir(dst_path_student)
 
+# BUGFIX: When doing 05 3, it picks up 07-Ins_Students_t_test\Solved as already being there. This is because the directory, even though an instructor dir, contains
+#         "Stu". I need to be able to make sure "Stu" is there AND "Ins" is not to proceed.
 for f in src_all_files_teacher:
     # This means it a student directory
     if "Stu" in f:
@@ -67,9 +69,9 @@ master = repo.heads.master
 try:
     repo.git.add(".")
     repo.git.commit(m = commit_message)
-    cmd = ['git', 'push']
-    p = Popen(cmd)
-    p.wait()
+    # cmd = ['git', 'push']
+    # p = Popen(cmd)
+    # p.wait()
     print("Successfuly pushed from script!")
 except:
     print("Error occured. Git script ran unsuccessfully!")
