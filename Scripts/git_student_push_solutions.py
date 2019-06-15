@@ -46,7 +46,7 @@ print(dst_path_student)
 src_all_files_teacher = os.listdir(src_path_teacher)
 dst_all_files_student = os.listdir(dst_path_student)
 
-# BUGFIX: When doing 05 3, it picks up 07-Ins_Students_t_test\Solved as already being there. This is because the directory, even though an instructor dir, contains
+# BUG: When doing 05 3, it picks up 07-Ins_Students_t_test\Solved as already being there. This is because the directory, even though an instructor dir, contains
 #         "Stu". I need to be able to make sure "Stu" is there AND "Ins" is not to proceed.
 for f in src_all_files_teacher:
     # This means it a student directory
@@ -64,7 +64,7 @@ repo = Repo(repo_path)
 assert not repo.bare
 master = repo.heads.master
 
-# BUGFIX: Does not push for some reason, but was able to push to my master branch...could be because it is doing the command in reference to this folder and not repo.git
+# BUG: Does not push for some reason, but was able to push to my master branch...could be because it is doing the command in reference to this folder and not repo.git
 #         Try to figure out how to get repo.git.push to work!
 try:
     repo.git.add(".")
