@@ -21,8 +21,8 @@ import shutil
 from pathlib import Path
 
 #################### FOR TESTING ##############################
-repo_path = os.path.join(os.getcwd(), "../")
-# repo_path = os.path.join("..", "..", "NUCHI201905DATA2")
+#repo_path = os.path.join(os.getcwd(), "../")
+repo_path = os.path.join("..", "..", "NUCHI201905DATA2")
 command_line = sys.argv
 module_num = command_line[1]
 commit_message = f"Added folders for module: {module_num} via super cool script!"
@@ -30,8 +30,8 @@ commit_message = f"Added folders for module: {module_num} via super cool script!
 # Standard paths for teacher and student modules
 modules_path_teacher = os.path.join("..", "..", "DataViz-Lesson-Plans", "01-Lesson-Plans")
 #################### FOR TESTING ##############################
-modules_path_student = os.path.join("..", "..", "git-auto-northwestern-data-science", "Scripts", "Activities")
-# modules_path_student = os.path.join("..", "..", "NUCHI201905DATA2")
+#modules_path_student = os.path.join("..", "..", "git-auto-northwestern-data-science", "Scripts", "Activities")
+modules_path_student = os.path.join("..", "..", "NUCHI201905DATA2")
 
 # Get directory that corresponds to entered module_num
 directories = os.listdir(modules_path_teacher)
@@ -41,8 +41,8 @@ directory_path = os.path.join(directory[0])
 # Append directory_path to the correct module_num to the src and dst paths
 src_path_teacher = os.path.join(modules_path_teacher, directory_path)
 #################### FOR TESTING ##############################
-dst_path_student = modules_path_student
-# dst_path_student = os.path.join(modules_path_student, directory_path)
+#dst_path_student = modules_path_student
+dst_path_student = os.path.join(modules_path_student, directory_path)
 
 # Make directories /1 /2 /3
 for i in range(1, 4):
@@ -51,6 +51,10 @@ for i in range(1, 4):
 
 # Get all file names from dst file path
 dst_all_files_student = os.listdir(dst_path_student)
+
+##### BUG: If the newly created folder only has a README.md, it gives:
+# FileNotFoundError: [Errno 2] No such file or directory: '..\\..\\NUCHI201905DATA2\\06-Python-APIs\\1\\07-Stu_Explore_OMDb_API\\README.md'
+# Not too sure what is going on.
 
 # Collect files from directories /1 /2 /3
 for i in range(0, 3):
@@ -88,8 +92,8 @@ try:
     repo.git.add(".")
     repo.git.commit(m = commit_message)
     cmd = ['git', 'push']
-    p = Popen(cmd)
-    p.wait()
-    print("Successfuly pushed from script!")
+    # p = Popen(cmd)
+    # p.wait()
+    # print("Successfuly pushed from script!")
 except:
     print("Error occured. Git script ran unsuccessfully!")
