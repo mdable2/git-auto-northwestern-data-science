@@ -16,6 +16,4 @@ Python scripts to programatically do the following:
 ## Possible Improvements
 
 1. For loop to create directories in 'starting' could take in a cmd line argument and only create directories for number entered. Then only add files for that number entered. Could be either a range based (like 1 - 2) or a specific directory with option to add multiple (like 1 or 1 2).
-2. Refactor code to move reused pieces into a reusable module.
-
-[EOF]
+2. Refactor code to move reused pieces into a reusable module. 
