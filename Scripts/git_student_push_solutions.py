@@ -18,17 +18,17 @@ def copy_and_check(src, dst):
 
 #################### FOR TESTING ##############################
 #repo_path = os.path.join(os.getcwd(), "../")
-repo_path = os.path.join("..", "..", "NUCHI201905DATA2")
+repo_path = os.path.join("..", "..", "Student-Repo")
 command_line = sys.argv
 module_num = command_line[1]
 lesson_num = command_line[2]
 commit_message = f"Added solutions for module: {module_num} lesson: {lesson_num} via super cool script!"
 
 # Standard paths for teacher and student modules
-modules_path_teacher = os.path.join("..", "..", "DataViz-Lesson-Plans", "01-Lesson-Plans")
+modules_path_teacher = os.path.join("..", "..", "Teacher-Repo", "01-Lesson-Plans")
 #################### FOR TESTING ##############################
 #modules_path_student = os.path.join("..", "..", "git-auto-northwestern-data-science", "Scripts", "Activities")
-modules_path_student = os.path.join("..", "..", "NUCHI201905DATA2")
+modules_path_student = os.path.join("..", "..", "Student-Repo")
 
 # Get directory that corresponds to entered module_num
 directories = os.listdir(modules_path_teacher)
